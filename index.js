@@ -5,7 +5,7 @@ let gops = null;
 let stalker = null;
 let glog4js = null;
 
-export function configure(log4js, path, ops) {
+function configure(log4js, path, ops) {
   if (stalker) {
     try {
       stalker.close();
@@ -14,6 +14,7 @@ export function configure(log4js, path, ops) {
   gpath = null;
   gops = null;
   glog4js = null;
+  ops = ops || { reloadSecs: 60 };
   log4js.configure(path, ops);
   if (!ops.reloadSecs) {
     return;
@@ -83,3 +84,5 @@ function listener(changeType, fullPath, currentStat, previousStat) {
       break;
   }
 }
+
+module.exports = configure;

@@ -1,0 +1,16 @@
+{
+  "appenders": {
+    "cheese": {
+      "type": "file",
+      "filename": "logs/app.log",
+      "maxLogSize": 10485760,
+      "backups": 10
+    },
+    "out": {
+      "type": "stdout"
+    }
+  },
+  "categories": {
+    "default": { "appenders": ["cheese", "out"], "level": "info" }
+  }
+}
