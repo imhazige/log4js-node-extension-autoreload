@@ -1,0 +1,31 @@
+{
+  "name": "log4js-node-extension-autoreload",
+  "version": "1.0.0",
+  "description": "monitor log4js configuration file on runtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imhazige/log4js-node-extension-autoreload.git"
+  },
+  "keywords": [
+    "log4js",
+    "autoreload",
+    "monitor",
+    "reloadSecs"
+  ],
+  "author": "kazge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imhazige/log4js-node-extension-autoreload/issues"
+  },
+  "homepage": "https://github.com/imhazige/log4js-node-extension-autoreload#readme",
+  "dependencies": {
+    "watchr": "^4.1.0"
+  },
+  "devDependencies": {
+    "log4js": "^3.0.6"
+  }
+}
