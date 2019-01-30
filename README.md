@@ -12,7 +12,7 @@ Example:
 
 ```javascript
 var log4js = require('log4js');
-var log4jsAutoreload = require('./index');
+var log4jsAutoreload = require('log4js-node-extension-autoreload');
 
 log4jsAutoreload(log4js, 'log4jsconf.json', { reloadSecs: 5 });
 
