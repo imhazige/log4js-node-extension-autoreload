@@ -29,3 +29,6 @@ setInterval(function() {
 From log4js 2, the autoreload support have been removed. Refer to [here](https://github.com/log4js-node/log4js-node/issues/497#issuecomment-312776289).
 
 This package implement a simple wrapper function to use [watchr](https://github.com/bevry/watchr) to provide the support of autoreload when configuration file be updated.
+
+
+## Note:
