@@ -30,5 +30,6 @@ From log4js 2, the autoreload support have been removed. Refer to [here](https:/
 
 This package implement a simple wrapper function to use [watchr](https://github.com/bevry/watchr) to provide the support of autoreload when configuration file be updated.
 
-
 ## Note:
+
+If you are using file appender, you'd better set the filename to be a absolute path, because if you use relative path, it will relative to the CWD(current work directory). In some case, especially when develop, it will be the path of this package(under the node_modules) which invoke the `log4js.configure`.
