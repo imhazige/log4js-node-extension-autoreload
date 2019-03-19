@@ -24,7 +24,7 @@ setInterval(function() {
 }, 1000);
 ```
 
-## Support javascript template configuration
+## Support Javascript Template Configuration
 
 ```json
 {
