@@ -1,6 +1,6 @@
 {
   "name": "log4js-node-extension-autoreload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "monitor log4js configuration file on runtime",
   "main": "index.js",
   "scripts": {
