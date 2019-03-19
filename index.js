@@ -14,25 +14,15 @@ function refresh() {
   // replace env vars
   let buffer = fs.readFileSync(gpath);
   let text = buffer.toString();
-  let jsonConfig = JSON.parse(text);
-
-  if (jsonConfig.appenders) {
-    Object.keys(jsonConfig.appenders).map(key => {
-      const o = jsonConfig.appenders[key];
-      if (o.type == 'file') {
-        let filename = o.filename;
-
-        if (!path.isAbsolute(filename)) {
-          let absolutePath = path.resolve(process.cwd(), filename);
-          console.info('resolve relative path', filename, absolutePath);
-          o.filename = absolutePath;
-        }
-      }
-    });
+  try {
+    //eval config
+    text = eval('`' + text + '`');
+    let jsonConfig = JSON.parse(text);
+    glog4js.configure(jsonConfig, gops);
+    console.info('reload logconf', gpath, jsonConfig);
+  } catch (err) {
+    console.error(`there are error on you config ${gpath} : ${err.message}`);
   }
-
-  glog4js.configure(jsonConfig, gops);
-  console.info('reload logconf', gpath, jsonConfig);
 }
 
 function configure(log4js, path, ops) {

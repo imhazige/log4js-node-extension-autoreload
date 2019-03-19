@@ -24,6 +24,27 @@ setInterval(function() {
 }, 1000);
 ```
 
+Support javascript template configuration
+
+```json
+{
+  "appenders": {
+    "cheese": {
+      "type": "file",
+      "filename": "${process.cwd()}/logs/app.log",
+      "maxLogSize": 10485760,
+      "backups": 10
+    },
+    "out": {
+      "type": "stdout"
+    }
+  },
+  "categories": {
+    "default": { "appenders": ["cheese", "out"], "level": "debug" }
+  }
+}
+```
+
 ## The Cause
 
 From log4js 2, the autoreload support have been removed. Refer to [here](https://github.com/log4js-node/log4js-node/issues/497#issuecomment-312776289).
