@@ -11,6 +11,6 @@
     }
   },
   "categories": {
-    "default": { "appenders": ["cheese", "out"], "level": "info" }
+    "default": { "appenders": ["cheese", "out"], "level": "debug" }
   }
 }

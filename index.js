@@ -1,9 +1,39 @@
 var watchr = require('watchr');
+var fs = require('fs');
+var path = require('path');
 
 let gpath = null;
 let gops = null;
 let stalker = null;
 let glog4js = null;
+
+function refresh() {
+  if (!gpath) {
+    return;
+  }
+  // replace env vars
+  let buffer = fs.readFileSync(gpath);
+  let text = buffer.toString();
+  let jsonConfig = JSON.parse(text);
+
+  if (jsonConfig.appenders) {
+    Object.keys(jsonConfig.appenders).map(key => {
+      const o = jsonConfig.appenders[key];
+      if (o.type == 'file') {
+        let filename = o.filename;
+
+        if (!path.isAbsolute(filename)) {
+          let absolutePath = path.resolve(process.cwd(), filename);
+          console.info('resolve relative path', filename, absolutePath);
+          o.filename = absolutePath;
+        }
+      }
+    });
+  }
+
+  glog4js.configure(jsonConfig, gops);
+  console.info('reload logconf', gpath, jsonConfig);
+}
 
 function configure(log4js, path, ops) {
   if (stalker) {
@@ -15,13 +45,16 @@ function configure(log4js, path, ops) {
   gops = null;
   glog4js = null;
   ops = ops || { reloadSecs: 60 };
-  log4js.configure(path, ops);
   if (!ops.reloadSecs) {
+    log4js.configure(path, ops);
     return;
+  } else {
+    gpath = path;
+    gops = ops;
+    glog4js = log4js;
+    refresh();
   }
-  gpath = path;
-  gops = ops;
-  glog4js = log4js;
+
   // Create the stalker for the path
   stalker = watchr.create(path);
 
@@ -69,10 +102,7 @@ function listener(changeType, fullPath, currentStat, previousStat) {
       //     previousStat
       //   );
       glog4js.shutdown(() => {
-        if (gpath) {
-          glog4js.configure(gpath, gops);
-          console.log('reload logconf', gpath);
-        }
+        refresh();
       });
 
       break;
