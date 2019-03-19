@@ -45,20 +45,16 @@ setInterval(function() {
 }
 ```
 
-### Why Need Support Template Configuration?
-
-because when in develop mode, the relative path root resolved by log4js will some times set to place other than the project root folder, `process.cwd()` is also not the project root folder.
-
-But normally process.env.PWD(Mac/Linux) will be the root folder of your project.
-
-Or you can set the env on a shell to start the project, hence to make the config file not set any absolute path.
-
 ## The Cause
 
 From log4js 2, the autoreload support have been removed. Refer to [here](https://github.com/log4js-node/log4js-node/issues/497#issuecomment-312776289).
 
 This package implement a simple wrapper function to use [watchr](https://github.com/bevry/watchr) to provide the support of autoreload when configuration file be updated.
 
-## Note:
+### Why Need Support Template Configuration?
 
-If you are using file appender, you'd better set the filename to be a absolute path, because if you use relative path, it will relative to the CWD(current work directory). In some case, especially when develop, it will be the path of this package(under the node_modules) which invoke the `log4js.configure`.
+Because when in develop mode, the relative path root resolved by log4js will some times set to place other than the project root folder, `process.cwd()` is also not the project root folder.
+
+But normally process.env.PWD(Mac/Linux) will be the root folder of your project.
+
+Or you can set the env on a shell to start the project, hence to make the config file not set any absolute path.
