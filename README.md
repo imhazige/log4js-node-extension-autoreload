@@ -24,14 +24,14 @@ setInterval(function() {
 }, 1000);
 ```
 
-Support javascript template configuration
+## Support javascript template configuration
 
 ```json
 {
   "appenders": {
     "cheese": {
       "type": "file",
-      "filename": "${process.cwd()}/logs/app.log",
+      "filename": "${process.env.PWD}/logs/app.log",
       "maxLogSize": 10485760,
       "backups": 10
     },
@@ -44,6 +44,14 @@ Support javascript template configuration
   }
 }
 ```
+
+### Why Need Support Template Configuration?
+
+because when in develop mode, the relative path root resolved by log4js will some times set to place other than the project root folder, `process.cwd()` is also not the project root folder.
+
+But normally process.env.PWD(Mac/Linux) will be the root folder of your project.
+
+Or you can set the env on a shell to start the project, hence to make the config file not set any absolute path.
 
 ## The Cause
 
