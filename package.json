@@ -26,6 +26,6 @@
     "watchr": "^4.1.0"
   },
   "devDependencies": {
-    "log4js": "^3.0.6"
+    "log4js": "^6.4.0"
   }
 }
